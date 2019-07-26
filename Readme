@@ -1,0 +1,48 @@
+
+Note: this data elevator vol connector needs the HDF5 dev branch.
+      So far, we have tested until the following version HDF5 dev branch
+
+      commit 2e973f7e12301975f9d8dfdd5534682525554e77
+      Date:   Wed Jun 19 18:54:33 2019 -0500
+
+Please let us know if you have any problems
+   Bin Dong    dbin@lbl.gov
+   Suren Byna  sbyna@lbl.gov
+
+
+1, Compile HDF5 VOL lib
+   > cd src
+   > edit Makefile to setup your compile environments accordingly 
+   > make
+
+2, Test
+   > cd test
+   > edit Makefile to setup your compile environments accordingly   
+   > make
+   > ./test
+    Writing file_name = h5file-0.h5 at rank 0
+    Writing file_name = h5file-1.h5 at rank 0
+    Writing file_name = h5file-2.h5 at rank 0
+    Read file: h5file-0.h5 back to check at rank 0
+    Read file: h5file-1.h5 back to check at rank 0
+    Read file: h5file-2.h5 back to check at rank 0
+    [Test Passed] Read data back on BB , no error!
+
+3, Know issue
+   when you compile the code with -g flag
+   it may report some error at the very end (MPI_Finalize) 
+   But, it does not impact the usage of the connector
+
+   --------
+   Assertion failed: (0 == H5MM_curr_alloc_bytes_s), function H5MM_final_sanity_check, 
+   file H5MM.c, line 232.
+   Abort trap: 6
+
+This code share the same copyright as DataElevator 
+   https://bitbucket.org/sbyna/dataelevator/
+
+
+For more usage information, please take a look at 
+   https://bitbucket.org/sbyna/dataelevator/src/master/
+
+
